@@ -1,0 +1,65 @@
+Aliases on this computer:
+
+For reading video received from VTX:
+vtx-rx
+
+For reading video directly from camera via microhard:
+microhard-rx
+
+To start the camera display on the Pi desktop
+SSH on Pi: capra@192.168.2.2
+standard capra password
+
+on bash, run:
+vtx-tx
+
+==============================
+Original commands:
+
+To get stream from VTX (USB device):
+mpv --profile=low-latency --untimed --display-fps-override=15 -fs --no-cache av://v4l2:/dev/video0
+
+To get stream directly from rtsp cam via microhard:
+mpv --profile=low-latency \
+    --untimed \
+    --fs=yes \
+    --no-cache \
+    --rtsp-transport=udp \
+    --demuxer-max-bytes=500k \
+    --demuxer-readahead-secs=0 \
+    --vd-lavc-threads=4 \
+    --display-fps-override=15 \
+    --scale=bilinear \
+    rtsp://192.168.2.30:554
+
+To display the rtsp camera on the desktop, run this alias on the ssh session on bash:
+DISPLAY=:0 XAUTHORITY=/home/capra/.Xauthority \
+mpv --profile=low-latency \
+    --untimed \
+    --fs=yes \
+    --no-cache \
+    --rtsp-transport=udp \
+    --demuxer-max-bytes=500k \
+    --demuxer-readahead-secs=0 \
+    --vd-lavc-threads=4 \
+    -- display-fps-override=15 \
+    --scale=bilinear \
+    rtsp://192.168.2.30:554
+
+When the pi goes in sleep (no keyboard or mouse input), run:
+sudo systemctl restart lightdm 
+
+===========
+Further debug you can do to check the delay or other things via VTX:
+
+display timer on firefox:
+DISPLAY=:0 XAUTHORITY=/home/capra/.Xauthority \
+firefox --kiosk https://time.is
+
+display timer in console:
+DISPLAY=:0 XAUTHORITY=/home/capra/.Xauthority \
+xterm -fullscreen -fg white -bg black \
+    -fa 'DejaVu Sans Mono' -fs 120 \
+    -e 'while true; do clear; date +%H:%M:%S; sleep 0.1; done'
+    
+  
