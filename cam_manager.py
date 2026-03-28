@@ -85,5 +85,5 @@ def signal_handler(sig, frame):
 
 if __name__ == "__main__":
     signal.signal(signal.SIGINT, signal_handler)
-    manager = CameraManager('config.yaml')
+    manager = CameraManager('/home/capra/Repos/capra-rove-vtx-streamer/config.yaml')
     manager.run()

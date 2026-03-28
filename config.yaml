@@ -1,14 +1,8 @@
 cameras:
   - id: "0"
-    ip: "192.168.2.30"
-    port: 554
     stream_url: "rtsp://192.168.2.30:554/"
-    active: true
   - id: "4"
-    ip: "192.168.2.34"
-    port: 554
     stream_url: "rtsp://192.168.2.34:554/"
-    active: false
 hooks:
   udp:
     port: 5540
