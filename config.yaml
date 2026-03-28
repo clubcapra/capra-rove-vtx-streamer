@@ -1,0 +1,8 @@
+cameras:
+  - id: "0"
+    stream_url: "rtsp://192.168.2.30:554/"
+  - id: "4"
+    stream_url: "rtsp://192.168.2.34:554/"
+hooks:
+  udp:
+    port: 5540
